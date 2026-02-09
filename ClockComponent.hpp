@@ -1,0 +1,13 @@
+#pragma once
+
+#include "AComponent.hpp"
+
+
+namespace nts {
+    class  ClockComponent: public AComponent {
+    private:
+    public:
+        nts::Tristate compute(std::size_t pin) override;
+    };
+};
+
