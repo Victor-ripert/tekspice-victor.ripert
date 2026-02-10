@@ -13,6 +13,7 @@
 //     nts::IComponent *component;
 // };
 
+
 std::ostream &operator<<(std::ostream &s, nts::Tristate v)
 {
     switch (v) {
@@ -31,7 +32,12 @@ std::ostream &operator<<(std::ostream &s, nts::Tristate v)
     return s;
 }
 
-
+bool CircuitNameComp(const CircuitComponent &a, const CircuitComponent &b) {
+    return a.name < b.name;
+}
+void Circuit::sortVector() {
+    std::sort(_circuit.begin(), _circuit.end(), CircuitNameComp);
+}
 // Circuit();
 void Circuit::addComponent(std::string name, std::string type) {
 
@@ -63,14 +69,19 @@ if ((*currentComp).component->getType() == nts::Clock || (*currentComp).componen
 
 void Circuit::printInputs(){
 
-    // need to add sort func here
+    if (!(std::is_sorted(_circuit.begin(), _circuit.end(), CircuitNameComp))) {
+        sortVector();
+    }
     for (size_t i = 0; i < _circuit.size(); i++) {
         if (_circuit[i].component->getType() == nts::Input) // need to add the other type in a smart way // Truetype, False, Clock.
         std::cout << "\t" <<_circuit[i].name << ": " << _circuit[i].component->compute(1);
     }
 };// need to sort the "_circuit" first;
+
 void Circuit::printoutputs(){
-     // need to add sort func here
+    if (!(std::is_sorted(_circuit.begin(), _circuit.end(), CircuitNameComp))) {
+        sortVector();
+    }
     for (size_t i = 0; i < _circuit.size(); i++) {
         if (_circuit[i].component->getType() == nts::Output) // need to add the other type in a smart way - i guess only Output maybe
         std::cout << "\t" <<_circuit[i].name << ": " << _circuit[i].component->compute(1);
