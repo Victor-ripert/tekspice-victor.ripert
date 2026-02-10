@@ -20,6 +20,7 @@ class Circuit
 private:
     std::vector<CircuitComponent> _circuit;
     void sortVector(); // by name;
+    // CircuitComponent &getComp();
 public:
     Circuit();
     void addComponent(std::string name, std::string type); // use CompFactory(type); from factory class
@@ -28,3 +29,5 @@ public:
     void printoutputs();// need to sort the "_circuit" first;
     ~Circuit();
 };
+
+std::ostream &operator<<(std::ostream &s, nts::Tristate v);

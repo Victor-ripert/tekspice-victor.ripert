@@ -27,4 +27,16 @@ namespace nts {
             return nts::Undefined;
         return _pins[pin].component->compute(_pins[pin].pin);
     }
+
+    nts::CompType AComponent::getType() {
+        return _compType;
+    }
+
+    void AComponent::setType(nts::CompType type) {
+        _compType = type;
+    }
+
+    void AComponent::setTristate(nts::Tristate state) {
+        _state = state;
+    }
 };

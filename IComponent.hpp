@@ -10,6 +10,13 @@ namespace nts
         True = true,
         False = false
     };
+
+    enum CompType {
+        Input,
+        Clock,
+        Output
+        // NEED TO ADD THE REST
+    };
     class IComponent
     {
     public:
@@ -18,6 +25,9 @@ namespace nts
         virtual nts::Tristate compute(std::size_t pin) = 0;
         virtual void setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin) = 0;
         virtual nts::Tristate getLink(std::size_t pin) = 0;
+        virtual nts::CompType getType() = 0;
+        virtual void setType(nts::CompType type) = 0;
+        virtual void setTristate(nts::Tristate) = 0;
     };
 };
 
