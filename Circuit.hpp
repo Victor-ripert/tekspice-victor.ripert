@@ -23,7 +23,7 @@ private:
     // CircuitComponent &getComp();
 public:
     Circuit();
-    void addComponent(std::string name, std::string type); // use CompFactory(type); from factory class
+    void addComponent(std::string &name, std::string type); // use CompFactory(type); from factory class
     void updateInput(std::string name, nts::Tristate); //only works with type clock or input
     void printInputs();// need to sort the "_circuit" first;
     void printoutputs();// need to sort the "_circuit" first;
