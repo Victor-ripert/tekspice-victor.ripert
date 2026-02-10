@@ -14,7 +14,7 @@ namespace nts{
             return nts::True;
         }
 
-        if (val1 == nts::False || val1 == nts::False) {
+        if (val1 == nts::False || val2 == nts::False) {
             return nts::False;
         }
         return nts::Undefined;
