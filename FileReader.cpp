@@ -1,0 +1,84 @@
+#include "FileReader.hpp"
+
+FileReader::FileReader(Circuit &circuit , std::string FilePath) :_circuit(circuit), _file(FilePath), _section(none) {
+    if (!_file.is_open()) {
+        // need to add error
+    }
+}
+
+void FileReader::trimComments(std::string &line) {
+    size_t index = line.find('#');
+    if (index != std::string::npos) {
+        line = line.substr(0, index);
+    }
+}
+
+bool FileReader::updateSection(std::string line) {
+    if (line.compare(".chipsets:")) {
+        _section = chipset;
+        return true;
+    }
+    if (line.compare(".links:")) {
+        _section = links;
+        return true;
+    }
+    return false;
+};
+
+void FileReader::addChipset(std::string &line) {
+    size_t typePos = line.find_first_of(" \t");
+    if (typePos == std::string::npos) {
+        //need to add error;
+        return;
+    }
+    std::string type = line.substr(0, typePos);
+    size_t namePos = line.find_first_not_of(" \t", typePos);
+
+    if (namePos == std::string::npos) {
+        //need to add error;
+        return;
+    }
+    std::string name = line.substr(namePos);
+    _circuit.addComponent(name, type);
+}
+
+
+//needs work
+void FileReader::addLink(std::string &line) {
+    size_t link1Pos = line.find_first_of(" \t");
+    if (link1Pos == std::string::npos) {
+        //need to add error;
+        return;
+    }
+    std::string link1 = line.substr(0, link1Pos);
+    size_t link2Pos = line.find_first_not_of(" \t", link1Pos);
+
+    if (link2Pos == std::string::npos) {
+        //need to add error;
+        return;
+    }
+    std::string link2 = line.substr(link2Pos);
+}
+
+void FileReader::filterLine(std::string &line) {
+    if (_section == chipset) {
+        addChipset(line);
+        return;
+    }
+    if (_section == links) {
+        addLink(line);
+        return;
+    }
+    return;
+};
+
+void FileReader::parseFile() {
+    std::string line;
+    while (getline (_file, line)) {
+        trimComments(line);
+        if (updateSection(line)) {
+            continue;
+        }
+
+      }
+};
