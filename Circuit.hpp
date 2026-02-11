@@ -6,13 +6,14 @@
 #include <vector>
 #include <algorithm>
 #include <string>
+#include <memory>
 
 #include "IComponent.hpp"
 #include "Factory.hpp"
 
 struct CircuitComponent {
     std::string name;
-    nts::IComponent *component;
+    std::unique_ptr<nts::IComponent> component;
 };
 
 class Circuit

@@ -40,11 +40,11 @@ void Circuit::sortVector() {
 }
 // Circuit();
 void Circuit::addComponent(std::string &name, std::string type) {
-
+    CompFactory factory;
     CircuitComponent newComp;
-    nts::AndComponent needFac;
+    // nts::AndComponent needFac;
     //Need TO ADD IN FACTORY HERE;
-    newComp.component = &needFac;
+    newComp.component = factory.createComponent(type);
     newComp.name = name;
     _circuit.push_back(newComp);
 } // use CompFactory(type); from factory class
@@ -61,7 +61,7 @@ if (currentComp == _circuit.end()) {
     return;
 }
 
-if ((*currentComp).component->getType() == nts::Clock || (*currentComp).component->getType() == nts::Input) {
+if ((*currentComp).component->getType() == nts::ClockComp || (*currentComp).component->getType() == nts::Input) {
     (*currentComp).component->setTristate(state);
 }
 }; //only works with type clock or input
@@ -73,7 +73,7 @@ void Circuit::printInputs(){
         sortVector();
     }
     for (size_t i = 0; i < _circuit.size(); i++) {
-        if (_circuit[i].component->getType() == nts::Input) { // need to add the other type in a smart way // Truetype, False, Clock.
+        if (_circuit[i].component->getType() == nts::InputComp ) { // need to add the other type in a smart way // Truetype, False, Clock.
         std::cout << "\t" <<_circuit[i].name << ": " << _circuit[i].component->compute(1) << std::endl;
         };
     }
@@ -84,14 +84,8 @@ void Circuit::printoutputs(){
         sortVector();
     }
     for (size_t i = 0; i < _circuit.size(); i++) {
-        if (_circuit[i].component->getType() == nts::Output) { // need to add the other type in a smart way - i guess only Output maybe
+        if (_circuit[i].component->getType() == nts::OutputComp ) { // need to add the other type in a smart way - i guess only Output maybe
         std::cout << "\t" <<_circuit[i].name << ": " << _circuit[i].component->compute(1) << std::endl;
         };
     }
 };// need to sort the "_circuit" first;
-
-Circuit::~Circuit() {
-    for (auto& comp : _circuit) {
-        delete comp.component;
-    }
-}
