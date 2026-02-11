@@ -1,6 +1,9 @@
 #include "Circuit.hpp"
-#include <iostream>
+#include "FileReader.hpp"
 
-int main() {
+
+
+int main(int argc, char* argv[]) {
+
     return 0;
 }

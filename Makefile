@@ -22,7 +22,8 @@ OutputComponent.cpp\
 TrueComponent.cpp\
 XorComponent.cpp\
 Circuit.cpp\
-Factory.cpp
+Factory.cpp\
+FileReader.cpp
 
 
 OBJ = $(SRC:.cpp=.o)

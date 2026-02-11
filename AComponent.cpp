@@ -9,23 +9,22 @@ namespace nts {
     };
 
     void AComponent::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin) {
-
-        if (pin >= _number_of_pins) return;
-
+        if (pin >= _pins.size() || pin == 0 || otherPin == 0) return;
         _pins[pin].component = &other;
         _pins[pin].pin = otherPin;
 
         auto *otherComp = dynamic_cast<AComponent*>(&other);
-        if (otherComp && otherPin < otherComp->_number_of_pins) {
+        if (otherComp && otherPin < otherComp->_pins.size()) {
             otherComp->_pins[otherPin].component = this;
             otherComp->_pins[otherPin].pin = pin;
         };
     };
 
     nts::Tristate AComponent::getLink(std::size_t pin) {
-        if (_pins[pin].component == nullptr)
+        if (pin >= _pins.size()) {
             return nts::Undefined;
-        if (pin >= _number_of_pins) {
+        }
+        if (_pins[pin].component == nullptr) {
             return nts::Undefined;
         }
         return _pins[pin].component->compute(_pins[pin].pin);

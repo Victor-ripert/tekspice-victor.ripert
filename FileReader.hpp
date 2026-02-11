@@ -16,6 +16,8 @@ struct NamePin {
     size_t pin;
 };
 
+class Circuit;
+
 class FileReader
 {
 private:
@@ -31,5 +33,5 @@ private:
 public:
     FileReader(Circuit &circuit, std::string FilePath);
     void parseFile();
-    ~FileReader();
+    ~FileReader() = default;
 };

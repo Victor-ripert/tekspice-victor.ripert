@@ -17,6 +17,8 @@ struct CircuitComponent {
     std::unique_ptr<nts::IComponent> component;
 };
 
+struct NamePin;
+
 class Circuit
 {
 private:

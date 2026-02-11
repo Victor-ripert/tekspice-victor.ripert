@@ -1,6 +1,6 @@
 #include "FileReader.hpp"
 
-FileReader::FileReader(Circuit &circuit , std::string FilePath) :_circuit(circuit), _file(FilePath), _section(none) {
+FileReader::FileReader(Circuit &circuit , std::string FilePath) : _file(FilePath), _circuit(circuit), _section(none) {
     if (!_file.is_open()) {
         // need to add error
     }
@@ -14,11 +14,11 @@ void FileReader::trimComments(std::string &line) {
 }
 
 bool FileReader::updateSection(std::string line) {
-    if (line.compare(".chipsets:")) {
+    if (line == ".chipsets:") {
         _section = chipset;
         return true;
     }
-    if (line.compare(".links:")) {
+    if  (line == ".links:") {
         _section = links;
         return true;
     }
@@ -45,10 +45,10 @@ void FileReader::addChipset(std::string &line) {
 
 NamePin FileReader::getNamePin(std::string &linePart) {
     size_t pos = linePart.find(':');
-    if (pos == std::string::npos) {
-    return;
-    }
     NamePin np;
+    if (pos == std::string::npos) {
+    return np;
+    }
     np.name = linePart.substr(0, pos);
     std::string pin = linePart.substr(pos + 1);
     np.pin = std::stoul(pin);
@@ -89,9 +89,12 @@ void FileReader::parseFile() {
     std::string line;
     while (getline (_file, line)) {
         trimComments(line);
+        if (line.find_first_not_of(" \t") == std::string::npos) {
+            continue;
+        }
         if (updateSection(line)) {
             continue;
         }
-
+        filterLine(line);
       }
 };
