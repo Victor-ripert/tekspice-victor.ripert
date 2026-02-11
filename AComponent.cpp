@@ -5,7 +5,7 @@ namespace nts {
 
     AComponent::AComponent(size_t pins, nts::CompType type, nts::Tristate state)
     : _state(state), _pins(pins), _number_of_pins(pins), _compType(type){
-
+        _pins.resize(pins + 1);
     };
 
     void AComponent::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin) {
@@ -25,6 +25,9 @@ namespace nts {
     nts::Tristate AComponent::getLink(std::size_t pin) {
         if (_pins[pin].component == nullptr)
             return nts::Undefined;
+        if (pin >= _number_of_pins) {
+            return nts::Undefined;
+        }
         return _pins[pin].component->compute(_pins[pin].pin);
     }
 

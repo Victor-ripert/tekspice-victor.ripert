@@ -46,7 +46,7 @@ void Circuit::addComponent(std::string &name, std::string type) {
     //Need TO ADD IN FACTORY HERE;
     newComp.component = factory.createComponent(type);
     newComp.name = name;
-    _circuit.push_back(newComp);
+    _circuit.push_back(std::move(newComp));
 } // use CompFactory(type); from factory class
 
 
@@ -61,7 +61,7 @@ if (currentComp == _circuit.end()) {
     return;
 }
 
-if ((*currentComp).component->getType() == nts::ClockComp || (*currentComp).component->getType() == nts::Input) {
+if ((*currentComp).component->getType() == nts::ClockComp || (*currentComp).component->getType() == nts::InputComp) {
     (*currentComp).component->setTristate(state);
 }
 }; //only works with type clock or input

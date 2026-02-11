@@ -20,7 +20,9 @@ NotComponent.cpp\
 OrComponent.cpp\
 OutputComponent.cpp\
 TrueComponent.cpp\
-XorComponent.cpp
+XorComponent.cpp\
+Circuit.cpp\
+Factory.cpp
 
 
 OBJ = $(SRC:.cpp=.o)

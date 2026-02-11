@@ -23,12 +23,13 @@ private:
     void sortVector(); // by name;
     // CircuitComponent &getComp();
 public:
-    Circuit();
+    Circuit() = default;
+    ~Circuit() = default;
     void addComponent(std::string &name, std::string type); // use CompFactory(type); from factory class
     void updateInput(std::string name, nts::Tristate); //only works with type clock or input
     void printInputs();// need to sort the "_circuit" first;
     void printoutputs();// need to sort the "_circuit" first;
-    ~Circuit();
+
 };
 
 std::ostream &operator<<(std::ostream &s, nts::Tristate v);
