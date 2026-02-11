@@ -40,8 +40,20 @@ void FileReader::addChipset(std::string &line) {
     }
     std::string name = line.substr(namePos);
     _circuit.addComponent(name, type);
-}
+};
 
+
+NamePin FileReader::getNamePin(std::string &linePart) {
+    size_t pos = linePart.find(':');
+    if (pos == std::string::npos) {
+    return;
+    }
+    NamePin np;
+    np.name = linePart.substr(0, pos);
+    std::string pin = linePart.substr(pos + 1);
+    np.pin = std::stoul(pin);
+    return np;
+}
 
 //needs work
 void FileReader::addLink(std::string &line) {
@@ -58,6 +70,7 @@ void FileReader::addLink(std::string &line) {
         return;
     }
     std::string link2 = line.substr(link2Pos);
+    _circuit.linkComponents(getNamePin(link1), getNamePin(link2));
 }
 
 void FileReader::filterLine(std::string &line) {

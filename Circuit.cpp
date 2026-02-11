@@ -13,6 +13,11 @@
 //     nts::IComponent *component;
 // };
 
+// struct NamePin {
+//     std::string name;
+//     size_t pin;
+// };
+
 
 std::ostream &operator<<(std::ostream &s, nts::Tristate v)
 {
@@ -49,21 +54,36 @@ void Circuit::addComponent(std::string &name, std::string type) {
     _circuit.push_back(std::move(newComp));
 } // use CompFactory(type); from factory class
 
+void  Circuit::linkComponents(NamePin pair1, NamePin pair2){
+    auto currentComp1 = std::find_if(_circuit.begin(), _circuit.end(), [&pair1](const CircuitComponent& cur) {
+        return cur.name == pair1.name;
+    });
+    auto currentComp2 = std::find_if(_circuit.begin(), _circuit.end(), [&pair2](const CircuitComponent& cur) {
+        return cur.name == pair2.name;
+    });
+
+    if (currentComp1 == _circuit.end() || currentComp2 == _circuit.end()) {
+        //need error couldnt find;
+        return;
+    }
+
+    currentComp1->component->setLink(pair1.pin, *currentComp2->component, pair2.pin);
+}; // Namepin is just struct with the name as string and pin as size_t
+
 
 void Circuit::updateInput(std::string name, nts::Tristate state) {
+    auto currentComp = std::find_if(_circuit.begin(), _circuit.end(), [&name](const CircuitComponent& cur) {
+        return cur.name == name;
+    });
 
-auto currentComp = std::find_if(_circuit.begin(), _circuit.end(), [&name](const CircuitComponent& cur) {
-    return cur.name == name;
-});
+    if (currentComp == _circuit.end()) {
+        //need error couldnt find;
+        return;
+    }
 
-if (currentComp == _circuit.end()) {
-    //need error couldnt find;
-    return;
-}
-
-if ((*currentComp).component->getType() == nts::ClockComp || (*currentComp).component->getType() == nts::InputComp) {
-    (*currentComp).component->setTristate(state);
-}
+    if ((*currentComp).component->getType() == nts::ClockComp || (*currentComp).component->getType() == nts::InputComp) {
+        (*currentComp).component->setTristate(state);
+    }
 }; //only works with type clock or input
 
 

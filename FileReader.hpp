@@ -11,12 +11,18 @@ enum FileSection {
     none
 };
 
+struct NamePin {
+    std::string name;
+    size_t pin;
+};
+
 class FileReader
 {
 private:
     std::ifstream _file;
     Circuit &_circuit;
     FileSection _section;
+    NamePin getNamePin(std::string &linePart);
     void trimComments(std::string &line);
     bool updateSection(std::string line);
     void filterLine(std::string &line);
