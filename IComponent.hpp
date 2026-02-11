@@ -12,11 +12,19 @@ namespace nts
     };
 
     enum CompType {
-        Input,
-        Clock,
-        Output
+        InputComp,
+        ClockComp,
+        OutputComp,
+        AndComp,
+        FalseComp,
+        NotComp,
+        OrComp,
+        TrueComp,
+        XOrComp,
+        UnkownComp
         // NEED TO ADD THE REST
     };
+
     class IComponent
     {
     public:

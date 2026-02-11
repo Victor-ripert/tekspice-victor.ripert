@@ -2,7 +2,7 @@
 
 namespace nts{
 
-    OrComponent::OrComponent(): AComponent(3) {
+    OrComponent::OrComponent(): AComponent(3, nts::OrComp) {
 
     };
 

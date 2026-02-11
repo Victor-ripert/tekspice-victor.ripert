@@ -3,8 +3,8 @@
 
 namespace nts {
 
-    AComponent::AComponent(size_t pins, nts::Tristate state)
-    : _state(state), _pins(pins), _number_of_pins(pins){
+    AComponent::AComponent(size_t pins, nts::CompType type, nts::Tristate state)
+    : _state(state), _pins(pins), _number_of_pins(pins), _compType(type){
 
     };
 

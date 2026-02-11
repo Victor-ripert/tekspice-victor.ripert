@@ -2,7 +2,7 @@
 
 namespace nts{
 
-    TrueComponent::TrueComponent():AComponent(1, nts::True){
+    TrueComponent::TrueComponent():AComponent(1, TrueComp, nts::True){
 
     }
     nts::Tristate TrueComponent::compute(std::size_t pin) {

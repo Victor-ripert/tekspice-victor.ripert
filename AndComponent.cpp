@@ -1,7 +1,7 @@
 #include "AndComponent.hpp"
 
 namespace nts{
-    AndComponent::AndComponent() : AComponent(3) {};
+    AndComponent::AndComponent() : AComponent(3, nts::AndComp) {};
 
     nts::Tristate AndComponent::compute(std::size_t pin) {
         if (pin == 1 || pin == 2) {

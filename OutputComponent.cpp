@@ -2,7 +2,7 @@
 
 namespace nts{
 
-    OutputComponent::OutputComponent(): AComponent(1) {
+    OutputComponent::OutputComponent(): AComponent(1, nts::OutputComp) {
 
     };
 

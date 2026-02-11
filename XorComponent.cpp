@@ -2,7 +2,7 @@
 
 namespace nts{
 
-    XorComponent::XorComponent(): AComponent(3){
+    XorComponent::XorComponent(): AComponent(3, XOrComp){
 
     };
 

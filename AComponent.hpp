@@ -18,7 +18,7 @@ namespace nts {
         size_t _number_of_pins;
         nts::CompType _compType;
     public:
-        AComponent(size_t pins, nts::Tristate state = nts::Undefined);
+        AComponent(size_t pins, nts::CompType type = nts::Unkown, nts::Tristate state = nts::Undefined);
         // void simulate(std::size_t tick)override;
         // nts::Tristate compute(std::size_t pin) override;
         void setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin) override;

@@ -2,7 +2,7 @@
 
 namespace nts{
 
-    NotComponent::NotComponent(): AComponent(2){
+    NotComponent::NotComponent(): AComponent(2, nts::NotComp){
 
     };
     nts::Tristate NotComponent::compute(std::size_t pin) {
