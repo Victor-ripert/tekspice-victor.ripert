@@ -23,7 +23,8 @@ TrueComponent.cpp\
 XorComponent.cpp\
 Circuit.cpp\
 Factory.cpp\
-FileReader.cpp
+FileReader.cpp\
+UserInput.cpp
 
 
 OBJ = $(SRC:.cpp=.o)
