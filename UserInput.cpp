@@ -2,12 +2,12 @@
 #include <algorithm>
 #include <iostream>
 
-UserInput::UserInput(Circuit & circuit) : _circuit(circuit) {
-    _map["exit"] = [this](std::string, nts::Tristate) {_Exit();};
-    _map["display"] = [this](std::string, nts::Tristate)  {_Display();};
-    _map["simulate"] = [this](std::string, nts::Tristate)  {_Simulate();};
-    _map["loop"] = [this](std::string, nts::Tristate)  {_Loop();};
-    _map["other"] = [this] (std::string name, nts::Tristate val)  {_UpdateVal(name, val);};
+UserInput::UserInput(Circuit &circuit) : _circuit(circuit) {
+    // _map["exit"] = [this](std::string, nts::Tristate) {_Exit();};
+    _map["display"] = [this]()  {_Display();};
+    _map["simulate"] = [this]()  {_Simulate();};
+    _map["loop"] = [this]()  {_Loop();};
+    _map["other"] = [] ()  {};
 };
 
 nts::Tristate getState(std::string val) {
@@ -32,6 +32,7 @@ void UserInput::updateVal(std::string line) {
 void UserInput::_Display() {
     std::cout <<"tick: ";
     /// need a get tick function
+    std::cout << std::endl;
     std::cout << "input(s):" << std::endl;
     _circuit.printInputs();
     std::cout << "output(s):" << std::endl;
@@ -39,20 +40,22 @@ void UserInput::_Display() {
 };
 void UserInput::_Simulate(){};
 
-void UserInput::_Loop(){
-    while (1)
-    {
+void UserInput::_Loop() {
+    while (1) {
         _Simulate();
         _Display();
     }
-};
+}
+
+
 
 void UserInput::runInputs(){
     std::cout << "> ";
     std::cin >> _input;
     while (_input != "exit") {
         if (_map.find(_input) != _map.end()) {
-            _map[_input];
+            std::cout << "made here" << std::endl;
+            _map[_input]();
         } else {
             _map["other"];
         }

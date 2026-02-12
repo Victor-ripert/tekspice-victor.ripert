@@ -17,7 +17,7 @@ namespace nts {
 
         public:
             NanoExecption(const char *msg);
-            const char *what() noexcept;
+            const char *what() const noexcept override;
     };
 }
 

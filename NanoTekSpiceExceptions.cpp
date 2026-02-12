@@ -12,8 +12,9 @@ nts::NanoExecption::NanoExecption(const char *msg) {
     this->_msg = msg;
 }
 
-const char *nts::NanoExecption::what() noexcept {
-    std::string msg("Error : ");
-    msg.append(this->_msg);
-    return msg.data();
+const char *nts::NanoExecption::what() const noexcept{
+    // std::string msg("Error : ");
+    // msg.append(this->_msg);
+    // return msg.data();
+    return _msg;
 }

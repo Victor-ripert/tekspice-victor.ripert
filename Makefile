@@ -24,7 +24,8 @@ XorComponent.cpp\
 Circuit.cpp\
 Factory.cpp\
 FileReader.cpp\
-UserInput.cpp
+UserInput.cpp\
+ NanoTekSpiceExceptions.cpp
 
 
 OBJ = $(SRC:.cpp=.o)
