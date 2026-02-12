@@ -1,6 +1,7 @@
 #include "Circuit.hpp"
 #include "AndComponent.hpp"
 #include "AComponent.hpp"
+#include "NanoTekSpiceExceptions.hpp"
 #include <algorithm>
 
 
@@ -63,7 +64,7 @@ void  Circuit::linkComponents(NamePin pair1, NamePin pair2){
     });
 
     if (currentComp1 == _circuit.end() || currentComp2 == _circuit.end()) {
-        //need error couldnt find;
+        throw nts::NanoExecption("Couldn't find the right component");
         return;
     }
 
@@ -77,7 +78,7 @@ void Circuit::updateInput(std::string name, nts::Tristate state) {
     });
 
     if (currentComp == _circuit.end()) {
-        //need error couldnt find;
+        throw nts::NanoExecption("Couldn't find the right component");
         return;
     }
 
