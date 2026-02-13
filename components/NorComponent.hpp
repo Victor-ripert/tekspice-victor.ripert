@@ -13,6 +13,7 @@ namespace nts {
     class NorComponent : public AComponent {
         private:
         std::vector<IComponent> _components;
+        
         public:
             NorComponent();
             nts::Tristate compute(std::size_t pin) override;
