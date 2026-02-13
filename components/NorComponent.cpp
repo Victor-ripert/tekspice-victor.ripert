@@ -18,6 +18,7 @@ namespace nts {
         std::unique_ptr<IComponent> or_gate = std::make_unique<OrComponent>();
         std::unique_ptr<IComponent> not_gate = std::make_unique<NotComponent>();
         components.push_back(*or_gate);
+        components.push_back(*not_gate);
         or_gate->setLink(1, *this, 1);
         this->_pins[1].component = nullptr;
         this->_pins[1].pin = 0;
