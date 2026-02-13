@@ -36,6 +36,7 @@ namespace nts
         virtual nts::CompType getType() = 0;
         virtual void setType(nts::CompType type) = 0;
         virtual void setTristate(nts::Tristate) = 0;
+        virtual nts::Tristate getTristate() = 0;
     };
 };
 

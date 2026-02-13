@@ -41,4 +41,8 @@ namespace nts {
     void AComponent::setTristate(nts::Tristate state) {
         _state = state;
     }
+
+    nts::Tristate AComponent::getTristate() {
+        return _state;
+    };
 };

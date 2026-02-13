@@ -27,6 +27,7 @@ namespace nts {
         nts::CompType getType() override;
         void setType(nts::CompType type) override;
         void setTristate(nts::Tristate state) override;
+        nts::Tristate getTristate() override;
     };
 };
 

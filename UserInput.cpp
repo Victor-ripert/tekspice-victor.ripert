@@ -3,7 +3,6 @@
 #include <iostream>
 
 UserInput::UserInput(Circuit &circuit) : _circuit(circuit) {
-    // _map["exit"] = [this](std::string, nts::Tristate) {_Exit();};
     _map["display"] = [this]()  {_Display();};
     _map["simulate"] = [this]()  {_Simulate();};
     _map["loop"] = [this]()  {_Loop();};
@@ -11,6 +10,7 @@ UserInput::UserInput(Circuit &circuit) : _circuit(circuit) {
 };
 
 nts::Tristate getState(std::string val) {
+    std::cout << val << std::endl;
     if (val == "0")
         return nts::False;
     if (val == "1")
@@ -21,6 +21,7 @@ nts::Tristate getState(std::string val) {
 }
 
 void UserInput::updateVal(std::string line) {
+    // std::cout << "in update" << std::endl;
     size_t pos = line.find('=');
     if (pos == std::string::npos) {
     return;
@@ -31,14 +32,16 @@ void UserInput::updateVal(std::string line) {
 
 void UserInput::_Display() {
     std::cout <<"tick: ";
-    /// need a get tick function
+    std::cout << _circuit.getTick();
     std::cout << std::endl;
     std::cout << "input(s):" << std::endl;
     _circuit.printInputs();
     std::cout << "output(s):" << std::endl;
     _circuit.printoutputs();
 };
-void UserInput::_Simulate(){};
+void UserInput::_Simulate(){
+    _circuit.oneTick();
+};
 
 void UserInput::_Loop() {
     while (1) {
@@ -54,10 +57,10 @@ void UserInput::runInputs(){
     std::cin >> _input;
     while (_input != "exit") {
         if (_map.find(_input) != _map.end()) {
-            std::cout << "made here" << std::endl;
+            // std::cout << "made here" << std::endl;
             _map[_input]();
         } else {
-            _map["other"];
+            updateVal(_input);
         }
         std::cout << "> ";
         std::cin >> _input;
@@ -65,3 +68,4 @@ void UserInput::runInputs(){
 };
 
 UserInput::~UserInput(){};
+

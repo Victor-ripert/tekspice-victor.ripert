@@ -24,15 +24,18 @@ class Circuit
 private:
     std::vector<CircuitComponent> _circuit;
     void sortVector(); // by name;
+    size_t _tick;
     // CircuitComponent &getComp();
 public:
-    Circuit() = default;
+    Circuit();
     ~Circuit() = default;
     void addComponent(std::string &name, std::string type); // use CompFactory(type); from factory class
     void updateInput(std::string name, nts::Tristate); //only works with type clock or input
     void linkComponents(NamePin pair1, NamePin pair2); // Namepin is just struct with the name as string and pin as size_t
     void printInputs();// need to sort the "_circuit" first;
     void printoutputs();// need to sort the "_circuit" first;
+    void oneTick();
+    size_t getTick();
 
 };
 

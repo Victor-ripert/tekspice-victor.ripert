@@ -11,7 +11,7 @@ class UserInput
 private:
     std::string _input;
     std::unordered_map<std::string, std::function<void()>> _map;
-    Circuit & _circuit;
+    Circuit &_circuit;
     void _Exit();
     void _Display();
     void _Simulate();

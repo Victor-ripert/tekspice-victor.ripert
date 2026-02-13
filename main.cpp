@@ -1,6 +1,7 @@
 #include "Circuit.hpp"
 #include "FileReader.hpp"
 #include "UserInput.hpp"
+#include "NanoTekSpiceExceptions.hpp"
 
 
 
@@ -9,10 +10,15 @@ int main(int argc, char **argv) {
         std::cerr << "Usage: " << argv[0] << " <file.nts>\n";
         return 84;
     }
-    Circuit circuit;
-    std::cout << "made here" << std::endl;
-    FileReader reader(circuit, argv[1]);
-    UserInput input(circuit);
+    try {
+        Circuit circuit;
+        std::cout << argv[1] << std::endl;
+        FileReader reader(circuit, argv[1]);
+        reader.parseFile();
+        UserInput input(circuit);
+        input.runInputs();
+    } catch(nts::NanoExecption e) {
+        std::cerr << e.what() << std::endl;
+    }
 
-    input.runInputs();
 }

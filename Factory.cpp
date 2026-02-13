@@ -17,7 +17,7 @@ std::unique_ptr<nts::IComponent> CompFactory::createComponent(const std::string 
 
     if (creators.empty()) {
         creators["input"] = []() { return std::make_unique<nts::InputComponent>(); };
-        // creators["clock"] = []() { return std::make_unique<nts::ClockComponent>(); };
+        creators["clock"] = []() { return std::make_unique<nts::ClockComponent>(); };
         creators["output"] = []() { return std::make_unique<nts::OutputComponent>(); };
         creators["and"] = []() { return std::make_unique<nts::AndComponent>(); };
         creators["false"] = []() { return std::make_unique<nts::FalseComponent>(); };

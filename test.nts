@@ -2,6 +2,7 @@
 .chipsets:
 input in1
 input in2
+clock c1
 and gate1
 output out1
 

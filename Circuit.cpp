@@ -19,6 +19,9 @@
 //     size_t pin;
 // };
 
+Circuit::Circuit():_tick(0){
+}
+
 
 std::ostream &operator<<(std::ostream &s, nts::Tristate v)
 {
@@ -46,6 +49,7 @@ void Circuit::sortVector() {
 }
 // Circuit();
 void Circuit::addComponent(std::string &name, std::string type) {
+    std::cout << "ADDED COMP" << std::endl;
     CompFactory factory;
     CircuitComponent newComp;
     // nts::AndComponent needFac;
@@ -87,14 +91,27 @@ void Circuit::updateInput(std::string name, nts::Tristate state) {
     }
 }; //only works with type clock or input
 
+bool inputCheck(nts::IComponent &comp) {
+    if(comp.getType() == nts::ClockComp
+    || comp.getType() == nts::InputComp
+    || comp.getType() == nts::TrueComp
+    || comp.getType() == nts::FalseComp
+    ) {
+        return true;
+    }
+    return false;
+}
 
 void Circuit::printInputs(){
-
     if (!(std::is_sorted(_circuit.begin(), _circuit.end(), CircuitNameComp))) {
         sortVector();
     }
     for (size_t i = 0; i < _circuit.size(); i++) {
-        if (_circuit[i].component->getType() == nts::InputComp ) { // need to add the other type in a smart way // Truetype, False, Clock.
+        if (!_circuit[i].component) {
+            std::cerr << "Error: null component at index " << i << std::endl;
+            continue;
+        }
+        if (inputCheck(*_circuit[i].component)) { // need to add the other type in a smart way // Truetype, False, Clock.
         std::cout << "\t" <<_circuit[i].name << ": " << _circuit[i].component->compute(1) << std::endl;
         };
     }
@@ -110,3 +127,26 @@ void Circuit::printoutputs(){
         };
     }
 };// need to sort the "_circuit" first;
+
+void updateClock(nts::IComponent &clock) {
+    if (clock.getTristate() == nts::Undefined)
+        return;
+    if(clock.getTristate() == nts::True) {
+        clock.setTristate(nts::False);
+    } else {
+        clock.setTristate(nts::True);
+    }
+}
+
+void Circuit::oneTick() {
+    _tick = _tick + 1;
+    for (size_t i = 0; i < _circuit.size(); i++) {
+        if (_circuit[i].component->getType() == nts::ClockComp ) { // update
+            updateClock(*_circuit[i].component);
+        };
+    }
+}
+
+size_t Circuit::getTick() {
+    return _tick;
+}
