@@ -6,10 +6,10 @@
 */
 
 
-
-#include "OrComponent.hpp"
-#include "NotComponent.hpp"
 #include <memory>
+
+#include "include/components/OrComponent.hpp"
+#include "include/components/NotComponent.hpp"
 #include "include/components/NorComponent.hpp"
 
 namespace nts {
