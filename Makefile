@@ -19,6 +19,7 @@ SRC = components/AComponent.cpp \
       components/OutputComponent.cpp \
       components/TrueComponent.cpp \
       components/XorComponent.cpp \
+	  components/OrComponent.cpp \
       core/Circuit.cpp \
       core/Factory.cpp \
       core/FileReader.cpp \

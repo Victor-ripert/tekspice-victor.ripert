@@ -7,7 +7,7 @@
 #include "include/components/FalseComponent.hpp"
 #include "include/components/InputComponent.hpp"
 #include "include/components/NotComponent.hpp"
-// #include "include/components/OrComponent.hpp"
+#include "include/components/OrComponent.hpp"
 #include "include/components/OutputComponent.hpp"
 #include "include/components/TrueComponent.hpp"
 #include "include/components/XorComponent.hpp"
@@ -23,7 +23,7 @@ std::unique_ptr<nts::IComponent> CompFactory::createComponent(const std::string 
         creators["and"] = []() { return std::make_unique<nts::AndComponent>(); };
         creators["false"] = []() { return std::make_unique<nts::FalseComponent>(); };
         creators["not"] = []() { return std::make_unique<nts::NotComponent>(); };
-        // creators["or"] = []() { return std::make_unique<nts::OrComponent>(); };
+        creators["or"] = []() { return std::make_unique<nts::OrComponent>(); };
         creators["true"] = []() { return std::make_unique<nts::TrueComponent>(); };
         creators["xor"] = []() { return std::make_unique<nts::XorComponent>(); };
     }
