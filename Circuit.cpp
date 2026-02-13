@@ -49,7 +49,7 @@ void Circuit::sortVector() {
 }
 // Circuit();
 void Circuit::addComponent(std::string &name, std::string type) {
-    std::cout << "ADDED COMP" << std::endl;
+    // std::cout << "ADDED COMP" << std::endl;
     CompFactory factory;
     CircuitComponent newComp;
     // nts::AndComponent needFac;

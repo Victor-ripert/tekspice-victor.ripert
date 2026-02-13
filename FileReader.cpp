@@ -21,7 +21,6 @@ bool FileReader::updateSection(std::string line) {
     }
     if  (line == ".links:") {
         _section = links;
-        std::cout << "updated section" << std::endl;
         return true;
     }
     return false;

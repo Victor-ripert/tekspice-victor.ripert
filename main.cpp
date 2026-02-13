@@ -12,7 +12,7 @@ int main(int argc, char **argv) {
     }
     try {
         Circuit circuit;
-        std::cout << argv[1] << std::endl;
+        // std::cout << argv[1] << std::endl;
         FileReader reader(circuit, argv[1]);
         reader.parseFile();
         UserInput input(circuit);

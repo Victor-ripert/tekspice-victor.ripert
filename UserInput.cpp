@@ -10,7 +10,6 @@ UserInput::UserInput(Circuit &circuit) : _circuit(circuit) {
 };
 
 nts::Tristate getState(std::string val) {
-    std::cout << val << std::endl;
     if (val == "0")
         return nts::False;
     if (val == "1")
@@ -57,7 +56,7 @@ void UserInput::runInputs(){
     std::cin >> _input;
     while (_input != "exit") {
         if (_map.find(_input) != _map.end()) {
-            // std::cout << "made here" << std::endl;
+
             _map[_input]();
         } else {
             updateVal(_input);

@@ -16,5 +16,5 @@ const char *nts::NanoExecption::what() const noexcept{
     // std::string msg("Error : ");
     // msg.append(this->_msg);
     // return msg.data();
-    return _msg;
+    return _msg.c_str();
 }

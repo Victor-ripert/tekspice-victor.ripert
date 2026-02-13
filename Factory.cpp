@@ -11,6 +11,7 @@
 #include "OutputComponent.hpp"
 #include "TrueComponent.hpp"
 #include "XorComponent.hpp"
+#include "NanoTekSpiceExceptions.hpp"
 
 std::unique_ptr<nts::IComponent> CompFactory::createComponent(const std::string &type) {
     static std::unordered_map<std::string, std::function<std::unique_ptr<nts::IComponent>()>> creators;
@@ -31,6 +32,7 @@ std::unique_ptr<nts::IComponent> CompFactory::createComponent(const std::string 
     if (it != creators.end()) {
         return it->second();
     } else {
+        throw nts::NanoExecption((type + " is not a supported component type").c_str());
         return nullptr;
     } // probs need to add a error on other side.
 }
