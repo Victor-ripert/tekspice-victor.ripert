@@ -1,4 +1,4 @@
-#include "TrueComponent.hpp"
+#include "include/components/TrueComponent.hpp"
 
 namespace nts{
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IComponent.hpp"
+#include "include/components/IComponent.hpp"
 #include <memory>
 
 class CompFactory {

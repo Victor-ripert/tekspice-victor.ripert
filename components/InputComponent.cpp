@@ -1,4 +1,4 @@
-#include "InputComponent.hpp"
+#include "include/components/InputComponent.hpp"
 
 namespace nts{
     InputComponent::InputComponent(): AComponent(1, nts::InputComp, nts::Undefined) {

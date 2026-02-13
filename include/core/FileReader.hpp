@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Circuit.hpp"
+#include "include/core/Circuit.hpp"
 #include <iostream>
 #include <fstream>
 #include <string>

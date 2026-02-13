@@ -5,7 +5,7 @@
 ** Nano Tek Spice
 */
 
-#include "NanoTekSpiceExceptions.hpp"
+#include "include/core/NanoTekSpiceExceptions.hpp"
 #include <string>
 
 nts::NanoExecption::NanoExecption(const char *msg) {

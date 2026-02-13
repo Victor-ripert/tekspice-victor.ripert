@@ -7,7 +7,7 @@
 
 #ifndef COMPONENT4001_HPP
     #define COMPONENT4001_HPP
-    #include "AComponent.hpp"
+    #include "include/components/AComponent.hpp"
 
 namespace nts {
     class Component4001 : public AComponent {

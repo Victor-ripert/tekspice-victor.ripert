@@ -1,4 +1,4 @@
-#include "XorComponent.hpp"
+#include "include/components/XorComponent.hpp"
 
 namespace nts{
 

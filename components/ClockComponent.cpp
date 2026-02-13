@@ -1,4 +1,4 @@
-#include "ClockComponent.hpp"
+#include "include/components/ClockComponent.hpp"
 
 namespace nts{
 

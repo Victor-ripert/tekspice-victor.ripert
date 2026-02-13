@@ -1,4 +1,4 @@
-#include "OutputComponent.hpp"
+#include "include/components/OutputComponent.hpp"
 
 namespace nts{
 

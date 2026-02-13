@@ -8,30 +8,33 @@
 NAME = Test
 
 CXX = clang++
-CXXFLAGS = -std=c++20 -Wall -Wextra -Werror
+CXXFLAGS = -std=c++20 -Wall -Wextra -Werror -I.
 
-SRC = AComponent.cpp\
-AndComponent.cpp\
-ClockComponent.cpp\
-FalseComponent.cpp\
-InputComponent.cpp\
-main.cpp\
-NotComponent.cpp\
-OrComponent.cpp\
-OutputComponent.cpp\
-TrueComponent.cpp\
-XorComponent.cpp\
-Circuit.cpp\
-Factory.cpp\
-FileReader.cpp\
-UserInput.cpp\
- NanoTekSpiceExceptions.cpp
-
+SRC = components/AComponent.cpp \
+      components/AndComponent.cpp \
+      components/ClockComponent.cpp \
+      components/FalseComponent.cpp \
+      components/InputComponent.cpp \
+      components/NotComponent.cpp \
+      components/OutputComponent.cpp \
+      components/TrueComponent.cpp \
+      components/XorComponent.cpp \
+      core/Circuit.cpp \
+      core/Factory.cpp \
+      core/FileReader.cpp \
+      core/NanoTekSpiceExceptions.cpp \
+      core/UserInput.cpp\
+	  main.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
-all:
-	$(CXX) $(CXXFLAGS) $(SRC) -o $(NAME)
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJ)

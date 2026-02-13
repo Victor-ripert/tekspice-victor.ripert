@@ -6,7 +6,7 @@
 */
 
 
-#include "NorComponent.hpp"
+#include "include/components/NorComponent.hpp"
 
 namespace nts {
     NorComponent::NorComponent() : AComponent(3, nts::NorComp) {

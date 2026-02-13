@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Circuit.hpp"
+#include "include/core/Circuit.hpp"
 #include <iostream>
 #include <unordered_map>
 #include <functional>
-#include "IComponent.hpp"
+#include "include/components/IComponent.hpp"
 
 class UserInput
 {
