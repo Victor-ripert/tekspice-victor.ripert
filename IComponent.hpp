@@ -21,7 +21,9 @@ namespace nts
         OrComp,
         TrueComp,
         XOrComp,
-        UnkownComp
+        UnkownComp,
+        NorComp,
+        Compo4001
         // NEED TO ADD THE REST
     };
 
