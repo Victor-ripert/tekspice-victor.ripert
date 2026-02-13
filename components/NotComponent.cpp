@@ -1,4 +1,4 @@
-#include "NotComponent.hpp"
+#include "include/components/NotComponent.hpp"
 
 namespace nts{
 

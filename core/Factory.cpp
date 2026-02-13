@@ -1,17 +1,17 @@
-#include "Factory.hpp"
+#include "include/core/Factory.hpp"
 #include <unordered_map>
 #include <functional>
-#include "AComponent.hpp"
-#include "AndComponent.hpp"
-#include "ClockComponent.hpp"
-#include "FalseComponent.hpp"
-#include "InputComponent.hpp"
-#include "NotComponent.hpp"
-#include "OrComponent.hpp"
-#include "OutputComponent.hpp"
-#include "TrueComponent.hpp"
-#include "XorComponent.hpp"
-#include "NanoTekSpiceExceptions.hpp"
+#include "include/components/AComponent.hpp"
+#include "include/components/AndComponent.hpp"
+#include "include/components/ClockComponent.hpp"
+#include "include/components/FalseComponent.hpp"
+#include "include/components/InputComponent.hpp"
+#include "include/components/NotComponent.hpp"
+// #include "include/components/OrComponent.hpp"
+#include "include/components/OutputComponent.hpp"
+#include "include/components/TrueComponent.hpp"
+#include "include/components/XorComponent.hpp"
+#include "include/core/NanoTekSpiceExceptions.hpp"
 
 std::unique_ptr<nts::IComponent> CompFactory::createComponent(const std::string &type) {
     static std::unordered_map<std::string, std::function<std::unique_ptr<nts::IComponent>()>> creators;
@@ -23,7 +23,7 @@ std::unique_ptr<nts::IComponent> CompFactory::createComponent(const std::string 
         creators["and"] = []() { return std::make_unique<nts::AndComponent>(); };
         creators["false"] = []() { return std::make_unique<nts::FalseComponent>(); };
         creators["not"] = []() { return std::make_unique<nts::NotComponent>(); };
-        creators["or"] = []() { return std::make_unique<nts::OrComponent>(); };
+        // creators["or"] = []() { return std::make_unique<nts::OrComponent>(); };
         creators["true"] = []() { return std::make_unique<nts::TrueComponent>(); };
         creators["xor"] = []() { return std::make_unique<nts::XorComponent>(); };
     }

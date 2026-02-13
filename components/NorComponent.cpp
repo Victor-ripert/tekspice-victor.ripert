@@ -6,10 +6,11 @@
 */
 
 
-#include "NorComponent.hpp"
+
 #include "OrComponent.hpp"
 #include "NotComponent.hpp"
 #include <memory>
+#include "include/components/NorComponent.hpp"
 
 namespace nts {
     NorComponent::NorComponent() : AComponent(3, nts::NorComp) {

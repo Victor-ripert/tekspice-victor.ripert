@@ -1,7 +1,7 @@
-#include "Circuit.hpp"
-#include "AndComponent.hpp"
-#include "AComponent.hpp"
-#include "NanoTekSpiceExceptions.hpp"
+#include "include/core/Circuit.hpp"
+#include "include/components/AndComponent.hpp"
+#include "include/components/AComponent.hpp"
+#include "include/core/NanoTekSpiceExceptions.hpp"
 #include <algorithm>
 
 

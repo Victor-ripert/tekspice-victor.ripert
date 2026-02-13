@@ -8,9 +8,9 @@
 #include <string>
 #include <memory>
 
-#include "IComponent.hpp"
-#include "Factory.hpp"
-#include "FileReader.hpp"
+#include "include/components/IComponent.hpp"
+#include "include/core/Factory.hpp"
+#include "include/core/FileReader.hpp"
 
 struct CircuitComponent {
     std::string name;

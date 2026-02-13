@@ -1,13 +1,13 @@
 #pragma once
 
-#include "AComponent.hpp"
+#include "include/components/AComponent.hpp"
 
 
 namespace nts {
-    class  TrueComponent: public AComponent {
+    class  NotComponent: public AComponent {
     private:
     public:
-        TrueComponent();
+        NotComponent();
         nts::Tristate compute(std::size_t pin) override;
     };
 };

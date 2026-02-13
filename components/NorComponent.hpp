@@ -7,7 +7,7 @@
 
 #ifndef NORCOMPONENT_HPP
     #define NORCOMPONENT_HPP
-    #include "AComponent.hpp"
+    #include "include/components/AComponent.hpp"
 
 namespace nts {
     class NorComponent : public AComponent {

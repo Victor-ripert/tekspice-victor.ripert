@@ -1,5 +1,5 @@
-#include "FileReader.hpp"
-#include "NanoTekSpiceExceptions.hpp"
+#include "include/core/FileReader.hpp"
+#include "include/core/NanoTekSpiceExceptions.hpp"
 
 FileReader::FileReader(Circuit &circuit , std::string FilePath) : _file(FilePath), _circuit(circuit), _section(none) {
     if (!_file.is_open()) {

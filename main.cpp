@@ -1,7 +1,7 @@
-#include "Circuit.hpp"
-#include "FileReader.hpp"
-#include "UserInput.hpp"
-#include "NanoTekSpiceExceptions.hpp"
+#include "include/core/Circuit.hpp"
+#include "include/core/FileReader.hpp"
+#include "include/core/UserInput.hpp"
+#include "include/core/NanoTekSpiceExceptions.hpp"
 
 
 

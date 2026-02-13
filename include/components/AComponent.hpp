@@ -1,7 +1,7 @@
 #pragma once
 
-#include "IComponent.hpp"
-#include "NanoTekSpiceExceptions.hpp"
+#include "include/components/IComponent.hpp"
+#include "include/core/NanoTekSpiceExceptions.hpp"
 #include <vector>
 
 
