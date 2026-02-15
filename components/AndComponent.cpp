@@ -5,7 +5,7 @@ namespace nts{
 
     nts::Tristate AndComponent::compute(std::size_t pin) {
         if (pin == 1 || pin == 2) {
-            return nts::Undefined;
+            return getLink(pin);
         }
         nts::Tristate val1 = getLink(1);
         nts::Tristate val2 = getLink(2);

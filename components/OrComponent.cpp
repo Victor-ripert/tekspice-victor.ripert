@@ -8,7 +8,7 @@ namespace nts{
 
     nts::Tristate OrComponent::compute(std::size_t pin) {
         if (pin == 1 || pin == 2) {
-            return nts::Undefined;
+            return getLink(pin);
         }
         nts::Tristate val1 = getLink(1);
         nts::Tristate val2 = getLink(2);
@@ -17,7 +17,7 @@ namespace nts{
             return nts::True;
         }
 
-        if (val1 == nts::False && val1 == nts::False) {
+        if (val1 == nts::False && val2 == nts::False) {
             return nts::False;
         }
         return nts::Undefined;
