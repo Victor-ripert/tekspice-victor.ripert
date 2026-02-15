@@ -45,4 +45,8 @@ namespace nts {
     nts::Tristate AComponent::getTristate() {
         return _state;
     };
+
+    PinLink& AComponent::getPin(std::size_t pin) {
+        return _pins[pin];
+    }
 };

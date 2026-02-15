@@ -11,6 +11,7 @@
 #include "include/components/OutputComponent.hpp"
 #include "include/components/TrueComponent.hpp"
 #include "include/components/XorComponent.hpp"
+#include "include/components/Component4071.hpp"
 #include "include/core/NanoTekSpiceExceptions.hpp"
 
 std::unique_ptr<nts::IComponent> CompFactory::createComponent(const std::string &type) {
@@ -26,6 +27,7 @@ std::unique_ptr<nts::IComponent> CompFactory::createComponent(const std::string 
         creators["or"] = []() { return std::make_unique<nts::OrComponent>(); };
         creators["true"] = []() { return std::make_unique<nts::TrueComponent>(); };
         creators["xor"] = []() { return std::make_unique<nts::XorComponent>(); };
+        creators["4071"] = []() { return std::make_unique<nts::Component4071>(); };
     }
 
     auto it = creators.find(type);
