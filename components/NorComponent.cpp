@@ -14,20 +14,32 @@
 
 namespace nts {
     NorComponent::NorComponent() : AComponent(3, nts::NorComp) {
-        std::vector<IComponent> components;
-        std::unique_ptr<IComponent> or_gate = std::make_unique<OrComponent>();
-        std::unique_ptr<IComponent> not_gate = std::make_unique<NotComponent>();
-        components.push_back(*or_gate);
-        components.push_back(*not_gate);
-        or_gate->setLink(1, *this, 1);
+        _components = std::vector<std::unique_ptr<IComponent>>(2);
+        _components[0] = std::make_unique<OrComponent>();
+        _components[1] = std::make_unique<NotComponent>();
+        _components[0]->setLink(1, *this, 1);
         this->_pins[1].component = nullptr;
         this->_pins[1].pin = 0;
-        or_gate->setLink(2, *this, 2);
+        _components[0]->setLink(2, *this, 2);
         this->_pins[2].component = nullptr;
         this->_pins[2].pin = 0;
-        not_gate->setLink(1, *or_gate, 3);
-        not_gate->setLink(2, *this, 3);
+        _components[1]->setLink(1, *_components[0], 3);
+        _components[1]->setLink(2, *this, 3);
         this->_pins[3].component = nullptr;
         this->_pins[3].pin = 0;
+    }
+
+    nts::Tristate NorComponent::compute(std::size_t pin) {
+        switch (pin)
+        {
+        case 1:
+            return getLink(1);
+        case 2:
+            return getLink(2);
+        case 3:
+            return this->_components[1]->compute(2);
+        default:
+            return nts::Tristate::Undefined;
+        }
     }
 }

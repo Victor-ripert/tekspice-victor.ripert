@@ -17,7 +17,7 @@ int main(int argc, char **argv) {
         reader.parseFile();
         UserInput input(circuit);
         input.runInputs();
-    } catch(nts::NanoExecption e) {
+    } catch(nts::NanoExecption &e) {
         std::cerr << e.what() << std::endl;
     }
 

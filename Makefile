@@ -5,9 +5,8 @@
 ## Makefile
 ##
 
-NAME = Test
+NAME = nanotekspice
 
-CXX = clang++
 CXXFLAGS = -std=c++20 -Wall -Wextra -Werror -I.
 
 SRC = components/AComponent.cpp \
@@ -20,13 +19,14 @@ SRC = components/AComponent.cpp \
       components/TrueComponent.cpp \
       components/XorComponent.cpp \
 	components/OrComponent.cpp \
+      components/NorComponent.cpp \
       components/Component4071.cpp \
       core/Circuit.cpp \
       core/Factory.cpp \
       core/FileReader.cpp \
       core/NanoTekSpiceExceptions.cpp \
       core/UserInput.cpp\
-	  main.cpp
+	main.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
