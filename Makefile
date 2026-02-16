@@ -21,6 +21,7 @@ SRC = components/AComponent.cpp \
 	components/OrComponent.cpp \
       components/NorComponent.cpp \
       components/Component4071.cpp \
+      components/Component4001.cpp \
       core/Circuit.cpp \
       core/Factory.cpp \
       core/FileReader.cpp \
