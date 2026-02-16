@@ -49,4 +49,10 @@ namespace nts {
     PinLink& AComponent::getPin(std::size_t pin) {
         return _pins[pin];
     }
+
+    void AComponent::setOneWayLink(IComponent& component, std::size_t pin, std::size_t otherPin) {
+        component.setLink(pin, *this, otherPin);
+        this->_pins[otherPin].component = nullptr;
+        this->_pins[otherPin].pin = 0;
+    }
 };

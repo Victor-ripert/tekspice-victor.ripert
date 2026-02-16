@@ -40,6 +40,7 @@ namespace nts
         virtual void setType(nts::CompType type) = 0;
         virtual void setTristate(nts::Tristate) = 0;
         virtual nts::Tristate getTristate() = 0;
+        virtual void setOneWayLink(IComponent& component, std::size_t pin, std::size_t otherPin) = 0;
     };
 };
 

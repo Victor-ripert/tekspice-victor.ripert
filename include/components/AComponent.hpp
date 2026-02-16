@@ -29,6 +29,7 @@ namespace nts {
         void setType(nts::CompType type) override;
         void setTristate(nts::Tristate state) override;
         nts::Tristate getTristate() override;
+        void setOneWayLink(IComponent& component, std::size_t pin, std::size_t otherPin) override;
     };
 };
 

@@ -19,34 +19,22 @@ namespace nts {
         _components[2] = std::make_unique<NorComponent>();
         _components[3] = std::make_unique<NorComponent>();
         // First Nor Gate
-        setOneWayLink(0, 1, 1); // Input 1
-        setOneWayLink(0, 2, 2); // Input 2
-        setOneWayLink(0, 3, 3); // Output
+        setOneWayLink(*_components[0], 1, 1); // Input 1
+        setOneWayLink(*_components[0], 2, 2); // Input 2
+        setOneWayLink(*_components[0], 3, 3); // Output
         // Second Nor Gate
-        setOneWayLink(1, 1, 5); // Input 1
-        setOneWayLink(1, 2, 6); // Input 2
-        setOneWayLink(1, 3, 4); // Output
+        setOneWayLink(*_components[1], 1, 5); // Input 1
+        setOneWayLink(*_components[1], 2, 6); // Input 2
+        setOneWayLink(*_components[1], 3, 4); // Output
         // Third Nor Gate
-        setOneWayLink(2, 1, 8); // Input 1
-        setOneWayLink(2, 2, 9); // Input 2
-        setOneWayLink(2, 3, 10); // Output
+        setOneWayLink(*_components[2], 1, 8); // Input 1
+        setOneWayLink(*_components[2], 2, 9); // Input 2
+        setOneWayLink(*_components[2], 3, 10); // Output
         // Forth Nor Gate
-        setOneWayLink(3, 1, 12); // Input 1
-        setOneWayLink(3, 2, 13); // Input 2
-        setOneWayLink(3, 3, 11); // Output
+        setOneWayLink(*_components[3], 1, 12); // Input 1
+        setOneWayLink(*_components[3], 2, 13); // Input 2
+        setOneWayLink(*_components[3], 3, 11); // Output
         // Pin 7 & 14 are ignored for this project;
-    }
-
-    void Component4001::setOneWayLink(std::size_t wichComponent, std::size_t pin, std::size_t otherPin) {
-        _components[wichComponent]->setLink(pin, *this, otherPin);
-        this->_pins[otherPin].component = nullptr;
-        this->_pins[otherPin].pin = 0;
-    }
-
-    void Component4001::setOneWayLink2(std::unique_ptr<IComponent> component, std::size_t pin, std::size_t otherPin) {
-        component->setLink(pin, *this, otherPin);
-        this->_pins[otherPin].component = nullptr;
-        this->_pins[otherPin].pin = 0;
     }
 
     nts::Tristate Component4001::compute(std::size_t pin) {

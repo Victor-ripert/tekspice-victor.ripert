@@ -18,8 +18,6 @@ namespace nts {
         public:
             Component4001();
             nts::Tristate compute(std::size_t pin) override;
-            void setOneWayLink(std::size_t wichComponent, std::size_t pin, std::size_t otherPin);
-            void setOneWayLink2(std::unique_ptr<IComponent> component, std::size_t pin, std::size_t otherPin)
     };
 }
 
