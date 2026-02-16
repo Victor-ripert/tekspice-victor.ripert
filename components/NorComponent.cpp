@@ -17,16 +17,10 @@ namespace nts {
         _components = std::vector<std::unique_ptr<IComponent>>(2);
         _components[0] = std::make_unique<OrComponent>();
         _components[1] = std::make_unique<NotComponent>();
-        _components[0]->setLink(1, *this, 1);
-        this->_pins[1].component = nullptr;
-        this->_pins[1].pin = 0;
-        _components[0]->setLink(2, *this, 2);
-        this->_pins[2].component = nullptr;
-        this->_pins[2].pin = 0;
+        setOneWayLink(*_components[0], 1, 1);
+        setOneWayLink(*_components[0], 2, 2);
         _components[1]->setLink(1, *_components[0], 3);
-        _components[1]->setLink(2, *this, 3);
-        this->_pins[3].component = nullptr;
-        this->_pins[3].pin = 0;
+        setOneWayLink(*_components[1], 2, 3);
     }
 
     nts::Tristate NorComponent::compute(std::size_t pin) {
