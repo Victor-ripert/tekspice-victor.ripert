@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2026
 ** NanoTekSpice
 ** File description:
-** 4001Component
+** NorComponent
 */
 
 #ifndef NORCOMPONENT_HPP

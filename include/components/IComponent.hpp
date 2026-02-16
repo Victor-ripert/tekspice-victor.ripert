@@ -23,8 +23,10 @@ namespace nts
         XOrComp,
         UnkownComp,
         NorComp,
+        NandComp,
         Comp4001,
-        Comp4071
+        Comp4071,
+        Comp4011
         // NEED TO ADD THE REST
     };
 
