@@ -12,6 +12,8 @@
 #include "include/components/Component4001.hpp"
 
 namespace nts {
+    const std::set<int> Component4001::_input_pins = {1, 2, 5, 6, 8, 9, 12, 13};
+
     Component4001::Component4001() : AComponent(14, nts::Comp4001) {
         _components = std::vector<std::unique_ptr<IComponent>>(4);
         _components[0] = std::make_unique<NorComponent>();
@@ -38,37 +40,19 @@ namespace nts {
     }
 
     nts::Tristate Component4001::compute(std::size_t pin) {
-        switch (pin) {
-        // Nor Gate 1
-        case 1: // Input
-            return getLink(1);
-        case 2: // Input
-            return getLink(2);
-        case 3: // Output
-            return this->_components[0]->compute(3);
-        // Nor Gate 2
-        case 4: // OutPut
-            return this->_components[1]->compute(3);
-        case 5: // Input
-            return getLink(5);
-        case 6: // Input
-            return getLink(6);
-        // Nor Gate 3
-        case 8: // Input
-            return getLink(8);
-        case 9: // Input
-            return getLink(9);
-        case 10: // Output
-            return this->_components[2]->compute(3);
-        // Nor Gate 4
-        case 11: // OutPut
-            return this->_components[3]->compute(3);
-        case 12: // Input
-            return getLink(12);
-        case 13: // Input
-            return getLink(13);
-        default: // Pin 7, 14 and error returns Undefined
-            return nts::Tristate::Undefined;
+        if (_input_pins.find(pin) != _input_pins.end())
+            return getLink(pin); // Input
+        switch (pin) { //otput
+            case 3:
+                return this->_components[0]->compute(3);
+            case 4:
+                return this->_components[1]->compute(3);
+            case 10:
+                return this->_components[2]->compute(3);
+            case 11:
+                return this->_components[3]->compute(3);
+            default: // Pin 7, 14 and error returns Undefined
+                return nts::Tristate::Undefined;
         }
     }
 }

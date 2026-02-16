@@ -9,11 +9,13 @@
     #define COMPONENT4001_HPP
     #include "include/components/AComponent.hpp"
     #include <memory>
+    #include <set>
 
 namespace nts {
     class Component4001 : public AComponent {
         private:
         std::vector<std::unique_ptr<IComponent>> _components;
+        static const std::set<int> _input_pins;
 
         public:
             Component4001();
