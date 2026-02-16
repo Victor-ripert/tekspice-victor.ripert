@@ -20,5 +20,5 @@ int main(int argc, char **argv) {
     } catch(nts::NanoExecption &e) {
         std::cerr << e.what() << std::endl;
     }
-
+    return 0;
 }
