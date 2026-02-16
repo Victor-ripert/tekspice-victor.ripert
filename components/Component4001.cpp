@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2026
 ** Victor.ripert@epitech.eu
 ** File description:
-** NorComponent
+** Component4001
 */
 
 
