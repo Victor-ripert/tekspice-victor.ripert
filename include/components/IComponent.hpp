@@ -26,7 +26,8 @@ namespace nts
         NandComp,
         Comp4001,
         Comp4071,
-        Comp4011
+        Comp4011,
+        Comp4030
         // NEED TO ADD THE REST
     };
 

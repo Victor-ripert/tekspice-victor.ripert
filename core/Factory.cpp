@@ -16,6 +16,7 @@
 #include "include/components/Component4071.hpp"
 #include "include/components/Component4001.hpp"
 #include "include/components/Component4011.hpp"
+#include "include/components/Component4030.hpp"
 #include "include/core/NanoTekSpiceExceptions.hpp"
 
 std::unique_ptr<nts::IComponent> CompFactory::createComponent(const std::string &type) {
@@ -36,6 +37,7 @@ std::unique_ptr<nts::IComponent> CompFactory::createComponent(const std::string 
         creators["4071"] = []() { return std::make_unique<nts::Component4071>(); };
         creators["4001"] = []() { return std::make_unique<nts::Component4001>(); };
         creators["4011"] = []() { return std::make_unique<nts::Component4011>(); };
+        creators["4030"] = []() { return std::make_unique<nts::Component4030>(); };
     }
 
     auto it = creators.find(type);
