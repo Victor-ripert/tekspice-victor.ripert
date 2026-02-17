@@ -14,7 +14,7 @@
 namespace nts {
     const std::set<int> Component4081::_input_pins = {1, 2, 5, 6, 8, 9, 12, 13};
 
-    Component4081::Component4081() : AComponent(14, nts::Comp4001) {
+    Component4081::Component4081() : AComponent(14, nts::Comp4081) {
         _components = std::vector<std::unique_ptr<IComponent>>(4);
         _components[0] = std::make_unique<AndComponent>();
         _components[1] = std::make_unique<AndComponent>();

@@ -13,7 +13,7 @@
 #include "include/components/NandComponent.hpp"
 
 namespace nts {
-    NandComponent::NandComponent() : AComponent(3, nts::NorComp) {
+    NandComponent::NandComponent() : AComponent(3, nts::NandComp) {
         _components = std::vector<std::unique_ptr<IComponent>>(2);
         _components[0] = std::make_unique<AndComponent>();
         _components[1] = std::make_unique<NotComponent>();
