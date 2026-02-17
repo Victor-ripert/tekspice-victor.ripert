@@ -18,6 +18,8 @@
 #include "include/components/Component4011.hpp"
 #include "include/components/Component4030.hpp"
 #include "include/components/Component4081.hpp"
+#include "include/components/FullAdderComponent.hpp"
+#include "include/components/Component4008.hpp"
 #include "include/core/NanoTekSpiceExceptions.hpp"
 
 std::unique_ptr<nts::IComponent> CompFactory::createComponent(const std::string &type) {
@@ -40,6 +42,8 @@ std::unique_ptr<nts::IComponent> CompFactory::createComponent(const std::string 
         creators["4011"] = []() { return std::make_unique<nts::Component4011>(); };
         creators["4030"] = []() { return std::make_unique<nts::Component4030>(); };
         creators["4081"] = []() { return std::make_unique<nts::Component4081>(); };
+        creators["fulladd"] = []() { return std::make_unique<nts::FullAdderComponent>(); };
+        creators["4008"] = []() { return std::make_unique<nts::Component4008>(); };
     }
 
     auto it = creators.find(type);

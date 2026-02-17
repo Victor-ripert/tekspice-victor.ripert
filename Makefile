@@ -26,6 +26,8 @@ SRC = components/AComponent.cpp \
       components/Component4011.cpp \
       components/Component4030.cpp \
       components/Component4081.cpp \
+      components/FullAdderComponent.cpp \
+      components/Component4008.cpp \
       core/Circuit.cpp \
       core/Factory.cpp \
       core/FileReader.cpp \
@@ -38,7 +40,7 @@ OBJ = $(SRC:.cpp=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME) -g3
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
