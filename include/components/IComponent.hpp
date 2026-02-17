@@ -28,7 +28,9 @@ namespace nts
         Comp4071,
         Comp4011,
         Comp4030,
-        Comp4081
+        Comp4081,
+        FullAddComp,
+        Comp4008
         // NEED TO ADD THE REST
     };
 
