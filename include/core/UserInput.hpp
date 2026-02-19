@@ -5,11 +5,18 @@
 #include <unordered_map>
 #include <functional>
 #include "include/components/IComponent.hpp"
+#include <queue>
+
+struct nameVal{
+    std::string name;
+    nts::Tristate state;
+};
 
 class UserInput
 {
 private:
     std::string _input;
+    std::queue <nameVal> updateQueue;
     std::unordered_map<std::string, std::function<void()>> _map;
     Circuit &_circuit;
     void _Exit();

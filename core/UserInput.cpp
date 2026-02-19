@@ -25,8 +25,10 @@ void UserInput::updateVal(std::string line) {
     if (pos == std::string::npos) {
     return;
     }
-    std::string name = line.substr(0, pos);
-    _circuit.updateInput(name, getState(line.substr(pos + 1)));
+    nameVal nv;
+    nv.name = line.substr(0, pos);
+    nv.state = getState(line.substr(pos + 1));
+    updateQueue.push(nv);
 }
 
 void UserInput::_Display() {
@@ -39,6 +41,11 @@ void UserInput::_Display() {
     _circuit.printoutputs();
 };
 void UserInput::_Simulate(){
+    while (!updateQueue.empty()) {
+        nameVal temp = updateQueue.front();
+        updateQueue.pop();
+        _circuit.updateInput(temp.name, temp.state);
+    }
     _circuit.oneTick();
 };
 

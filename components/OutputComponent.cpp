@@ -8,6 +8,7 @@ namespace nts{
 
     nts::Tristate OutputComponent::compute(std::size_t pin) {
         (void) pin;
-        return getLink(1);
+        _state = getLink(1);
+        return _state;
     }
 }
