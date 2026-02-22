@@ -24,7 +24,7 @@ private:
     void _Simulate();
     void _Loop();
     void _UpdateVal(std::string name, nts::Tristate val);
-    void updateVal(std::string line);
+    void updateVal(const std::string &line);
 
 public:
     UserInput(Circuit &);
