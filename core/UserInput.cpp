@@ -71,8 +71,18 @@ void UserInput::_Loop() {
 void UserInput::runInputs() {
     do {
         std::cout << "> ";
-        if (!(std::cin >> _input))
+        std::cout.flush();
+        if (!std::getline(std::cin, _input))
             break;
+
+        size_t start = _input.find_first_not_of(" \t\r\n");
+        if (start == std::string::npos)
+            continue;
+        _input = _input.substr(start, _input.find_last_not_of(" \t\r\n") - start + 1);
+
+        if (_input.empty())
+            continue;
+
         auto it = _map.find(_input);
         if (it != _map.end())
             it->second();
@@ -80,6 +90,7 @@ void UserInput::runInputs() {
             updateVal(_input);
     } while (_input != "exit");
 }
+
 
 
 UserInput::~UserInput() {}

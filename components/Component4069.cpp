@@ -29,24 +29,40 @@ namespace nts{
     }
 
     nts::Tristate Component4069::compute(std::size_t pin) {
-        if (_input_pins.find(pin) != _input_pins.end())
-            return getLink(pin); // Input
-        switch (pin) { //otput
-            case 2:
-                return this->_notGates[0]->compute(2);
-            case 4:
-                return this->_notGates[1]->compute(2);
-            case 6:
-                return this->_notGates[2]->compute(2);
-            case 8:
-                return this->_notGates[3]->compute(2);
-            case 10:
-                return this->_notGates[4]->compute(2);
-            case 12:
-                return this->_notGates[5]->compute(2);
-            default: // Pin 7, 14 and error returns Undefined
-                return nts::Tristate::Undefined;
+        if (_computing) {
+            if (_input_pins.find(pin) != _input_pins.end())
+                return getLink(pin);
+            return _state;
         }
+        _computing = true;
+        if (_input_pins.find(pin) != _input_pins.end()) {
+            _state = getLink(pin);
+        } else {
+            switch (pin) {
+            case 2:
+                _state = this->_notGates[0]->compute(2);
+                break;
+            case 4:
+                _state = this->_notGates[1]->compute(2);
+                break;
+            case 6:
+                _state = this->_notGates[2]->compute(2);
+                break;
+            case 8:
+                _state = this->_notGates[3]->compute(2);
+                break;
+            case 10:
+                _state = this->_notGates[4]->compute(2);
+                break;
+            case 12:
+                _state = this->_notGates[5]->compute(2);
+                break;
+            default:
+                _state = nts::Tristate::Undefined;
+            }
+        }
+        _computing = false;
+        return _state;
     }
 }
 

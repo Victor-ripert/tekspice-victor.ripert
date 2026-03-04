@@ -19,6 +19,7 @@ int main(int argc, char **argv) {
         input.runInputs();
     } catch(nts::NanoExecption &e) {
         std::cerr << e.what() << std::endl;
+        return 84;
     }
     return 0;
 }

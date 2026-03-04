@@ -46,21 +46,36 @@ namespace nts {
     }
 
     nts::Tristate Component4008::compute(std::size_t pin) {
-        if (_input_pins.find(pin) != _input_pins.end())
-            return getLink(pin); // Inputs
-        switch (pin) { // Outputs
-            case 10:
-                return this->_components[0]->compute(4); // Result of fulladd1
-            case 11:
-                return this->_components[1]->compute(4); // Result of fulladd2
-            case 12:
-                return this->_components[2]->compute(4); // Result of fulladd3
-            case 13:
-                return this->_components[3]->compute(4); // Result of fulladd4
-            case 14:
-                return this->_components[3]->compute(5); // Carry of fulladd4
-            default:
-                return nts::Tristate::Undefined; // pin 8 & pin 16 are ignored
+        if (_computing) {
+            if (_input_pins.find(pin) != _input_pins.end())
+                return getLink(pin);
+            return _state;
         }
+        _computing = true;
+        if (_input_pins.find(pin) != _input_pins.end()) {
+            _state = getLink(pin);
+        } else {
+            switch (pin) {
+            case 10:
+                _state = this->_components[0]->compute(4);
+                break;
+            case 11:
+                _state = this->_components[1]->compute(4);
+                break;
+            case 12:
+                _state = this->_components[2]->compute(4);
+                break;
+            case 13:
+                _state = this->_components[3]->compute(4);
+                break;
+            case 14:
+                _state = this->_components[3]->compute(5);
+                break;
+            default:
+                _state = nts::Tristate::Undefined;
+            }
+        }
+        _computing = false;
+        return _state;
     }
 }

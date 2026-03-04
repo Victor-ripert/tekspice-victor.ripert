@@ -24,16 +24,27 @@ namespace nts {
     }
 
     nts::Tristate NandComponent::compute(std::size_t pin) {
-        switch (pin)
-        {
-        case 1:
-            return getLink(1);
-        case 2:
-            return getLink(2);
-        case 3:
-            return this->_components[1]->compute(2);
-        default:
-            return nts::Tristate::Undefined;
+        if (_computing) {
+            if (pin == 1 || pin == 2)
+                return getLink(pin);
+            return _state;
         }
+        _computing = true;
+        switch (pin) {
+        case 1:
+            _state = getLink(1);
+            break;
+        case 2:
+            _state = getLink(2);
+            break;
+        case 3:
+            _state = this->_components[1]->compute(2);
+            break;
+        default:
+            _state = nts::Tristate::Undefined;
+        }
+        _computing = false;
+        return _state;
     }
+
 }
