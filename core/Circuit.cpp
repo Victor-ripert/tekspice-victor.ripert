@@ -56,6 +56,7 @@ void Circuit::addComponent(std::string &name, std::string type) {
     //Need TO ADD IN FACTORY HERE;
     newComp.component = factory.createComponent(type);
     newComp.name = name;
+    // std::cout << "ADDED COMP =" << newComp.name << std::endl;
     _circuit.push_back(std::move(newComp));
 } // use CompFactory(type); from factory class
 
@@ -66,9 +67,9 @@ void  Circuit::linkComponents(NamePin pair1, NamePin pair2){
     auto currentComp2 = std::find_if(_circuit.begin(), _circuit.end(), [&pair2](const CircuitComponent& cur) {
         return cur.name == pair2.name;
     });
-
+    // std::cout << "1 = " << pair1.name << " 2 = " << pair2.name << std::endl;
     if (currentComp1 == _circuit.end() || currentComp2 == _circuit.end()) {
-        throw nts::NanoExecption("Couldn't find the right component");
+        throw nts::NanoExecption("Couldn't find the right component when linking");
         return;
     }
 
@@ -112,7 +113,7 @@ void Circuit::printInputs(){
             continue;
         }
         if (inputCheck(*_circuit[i].component)) { // need to add the other type in a smart way // Truetype, False, Clock.
-        std::cout << "\t" <<_circuit[i].name << ": " << _circuit[i].component->compute(1) << std::endl;
+        std::cout << "\t" <<_circuit[i].name << ": " << _circuit[i].component->getTristate() << std::endl;
         };
     }
 };// need to sort the "_circuit" first;
@@ -123,7 +124,7 @@ void Circuit::printoutputs(){
     }
     for (size_t i = 0; i < _circuit.size(); i++) {
         if (_circuit[i].component->getType() == nts::OutputComp ) { // need to add the other type in a smart way - i guess only Output maybe
-        std::cout << "\t" <<_circuit[i].name << ": " << _circuit[i].component->compute(1) << std::endl;
+        std::cout << "\t" <<_circuit[i].name << ": " << _circuit[i].component->getTristate() << std::endl;
         };
     }
 };// need to sort the "_circuit" first;
@@ -144,6 +145,12 @@ void Circuit::oneTick() {
         if (_circuit[i].component->getType() == nts::ClockComp ) { // update
             updateClock(*_circuit[i].component);
         };
+    }
+
+    for (size_t i = 0; i < _circuit.size(); i++) {
+        if (_circuit[i].component->getType() == nts::OutputComp ) { // need to add the other type in a smart way - i guess only Output maybe
+             _circuit[i].component->compute(1);
+            };
     }
 }
 

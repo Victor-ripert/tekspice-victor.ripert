@@ -45,15 +45,28 @@ namespace nts {
     }
 
     nts::Tristate FullAdderComponent::compute(std::size_t pin) {
-        if (_input_pins.find(pin) != _input_pins.end())
-            return getLink(pin); // Inputs
-        switch (pin) { // Outputs
-        case 4:
-            return this->_components[1]->compute(3); // Result of the sum
-        case 5:
-            return this->_components[4]->compute(3); // Carry
-        default:
-            return nts::Tristate::Undefined;
+        if (_computing) {
+            if (_input_pins.find(pin) != _input_pins.end())
+                return getLink(pin);
+            return _state;
         }
+        _computing = true;
+        if (_input_pins.find(pin) != _input_pins.end()) {
+            _state = getLink(pin);
+        } else {
+            switch (pin) {
+            case 4:
+                _state = this->_components[1]->compute(3);
+                break;
+            case 5:
+                _state = this->_components[4]->compute(3);
+                break;
+            default:
+                _state = nts::Tristate::Undefined;
+            }
+        }
+        _computing = false;
+        return _state;
     }
+
 }

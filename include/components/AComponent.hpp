@@ -18,6 +18,7 @@ namespace nts {
         std::vector<PinLink> _pins;
         size_t _number_of_pins;
         nts::CompType _compType;
+        bool _computing = false;
     public:
         AComponent(size_t pins, nts::CompType type = nts::UnkownComp, nts::Tristate state = nts::Undefined);
         // void simulate(std::size_t tick)override;
