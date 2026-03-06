@@ -1,5 +1,6 @@
 #include "include/core/FileReader.hpp"
 #include "include/core/NanoTekSpiceExceptions.hpp"
+#include <format>
 
 FileReader::FileReader(Circuit &circuit , std::string FilePath) : _file(FilePath), _circuit(circuit), _section(none) {
     if (!_file.is_open()) {
@@ -12,6 +13,8 @@ void FileReader::trimComments(std::string &line) {
     if (index != std::string::npos) {
         line = line.substr(0, index);
     }
+    line.erase(line.find_last_not_of(" \t") + 1);
+    line.erase(0, line.find_first_not_of(" \t") + 1);
 }
 
 bool FileReader::updateSection(std::string line) {
@@ -29,7 +32,7 @@ bool FileReader::updateSection(std::string line) {
 void FileReader::addChipset(std::string &line) {
     size_t typePos = line.find_first_of(" \t");
     if (typePos == std::string::npos) {
-        throw nts::NanoExecption("addChipset: type not found");
+        throw nts::NanoExecption("Didn't find Component");
         return;
     }
     std::string type = line.substr(0, typePos);
