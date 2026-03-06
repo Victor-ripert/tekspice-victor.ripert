@@ -1,12 +1,17 @@
 
 .chipsets:
-input in1
-input in2
+input data
 clock c1
-and gate1
-output out1
+input set
+input clear
+output data_1
+output data_2
+dflipflop myflipflop
 
 .links:
-in1:1 gate1:1
-in2:1 gate1:2
-gate1:3 out1:1
+data:1 myflipflop:1
+c1:1 myflipflop:2
+set:1 myflipflop:3
+clear:1 myflipflop:4
+myflipflop:6 data_1:1
+myflipflop:5 data_2:1

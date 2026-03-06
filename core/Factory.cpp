@@ -21,6 +21,7 @@
 #include "include/components/FullAdderComponent.hpp"
 #include "include/components/Component4008.hpp"
 #include "include/components/Component4069.hpp"
+#include "include/components/DFlipFlopComponent.hpp"
 #include "include/core/NanoTekSpiceExceptions.hpp"
 
 
@@ -47,6 +48,7 @@ std::unique_ptr<nts::IComponent> CompFactory::createComponent(const std::string 
         creators["fulladd"] = []() { return std::make_unique<nts::FullAdderComponent>(); };
         creators["4008"] = []() { return std::make_unique<nts::Component4008>(); };
         creators["4069"] = []() { return std::make_unique<nts::Component4069>(); };
+        creators["dflipflop"] = []() { return std::make_unique<nts::DFlipFlopComponent>(); };
     }
 
     auto it = creators.find(type);

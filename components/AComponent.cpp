@@ -1,6 +1,5 @@
 #include "include/components/AComponent.hpp"
 #include<iostream>
-
 namespace nts {
 
     AComponent::AComponent(size_t pins, nts::CompType type, nts::Tristate state)
