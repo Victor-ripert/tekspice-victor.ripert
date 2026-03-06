@@ -29,6 +29,7 @@ SRC = components/AComponent.cpp \
       components/FullAdderComponent.cpp \
       components/Component4008.cpp \
       components/Component4069.cpp \
+      components/DFlipFLopComponent.cpp \
       core/Circuit.cpp \
       core/Factory.cpp \
       core/FileReader.cpp \

@@ -31,7 +31,8 @@ namespace nts
         Comp4081,
         FullAddComp,
         Comp4008,
-        Comp4069
+        Comp4069,
+        DFlipFlopComp
         // NEED TO ADD THE REST
     };
 
