@@ -86,8 +86,16 @@ void Circuit::updateInput(std::string name, nts::Tristate state) {
         throw nts::NanoExecption("Couldn't find the right component");
         return;
     }
+    if ((*currentComp).component->getType() == nts::ClockComp) {
+        if (state == nts::True) {
+            (*currentComp).component->setTristate(nts::False);
+        }
+        if (state == nts::False) {
+            (*currentComp).component->setTristate(nts::True);
+        }
+    }
 
-    if ((*currentComp).component->getType() == nts::ClockComp || (*currentComp).component->getType() == nts::InputComp) {
+    if ((*currentComp).component->getType() == nts::InputComp) {
         (*currentComp).component->setTristate(state);
     }
 }; //only works with type clock or input
