@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <csignal>
 #include <iostream>
+#include "include/core/NanoTekSpiceExceptions.hpp"
 
 static volatile sig_atomic_t _sigint = 0;
 
@@ -17,22 +18,39 @@ UserInput::UserInput(Circuit &circuit) : _circuit(circuit) {
 }
 
 
-nts::Tristate getState(const std::string &val) {
+static nts::Tristate getState(const std::string &val) {
     if (val == "0")
         return nts::False;
     if (val == "1")
         return nts::True;
-    return nts::Undefined;
+    if (val == "U")
+        return nts::Undefined;
+    throw nts::NanoExecption(
+        ("Invalid value '" + val + "': expected 0, 1, or U").c_str()
+    );
 }
 
 
 void UserInput::updateVal(const std::string &line) {
     size_t pos = line.find('=');
     if (pos == std::string::npos)
-        return;
+        throw nts::NanoExecption(
+            ("Unknown command: '" + line + "'").c_str()
+        );
+
+    std::string name  = line.substr(0, pos);
+    std::string value = line.substr(pos + 1);
+
+    if (name.empty())
+        throw nts::NanoExecption("Invalid assignment: input name cannot be empty");
+    if (value.empty())
+        throw nts::NanoExecption(
+            ("Invalid assignment: missing value for input '" + name + "'").c_str()
+        );
+
     nameVal nv;
-    nv.name  = line.substr(0, pos);
-    nv.state = getState(line.substr(pos + 1));
+    nv.name  = name;
+    nv.state = getState(value);
     updateQueue.push(nv);
 }
 
@@ -69,9 +87,10 @@ void UserInput::_Loop() {
 
 
 void UserInput::runInputs() {
-    do {
+    while (true) {
         std::cout << "> ";
         std::cout.flush();
+
         if (!std::getline(std::cin, _input))
             break;
 
@@ -82,15 +101,20 @@ void UserInput::runInputs() {
 
         if (_input.empty())
             continue;
+        if (_input == "exit")
+            break;
 
-        auto it = _map.find(_input);
-        if (it != _map.end())
-            it->second();
-        else
-            updateVal(_input);
-    } while (_input != "exit");
+        try {
+            auto it = _map.find(_input);
+            if (it != _map.end())
+                it->second();
+            else
+                updateVal(_input);
+        } catch (const nts::NanoExecption &e) {
+            std::cerr << "Error: " << e.what() << std::endl;
+        }
+    }
 }
-
 
 
 UserInput::~UserInput() {}
