@@ -49,16 +49,19 @@ void Circuit::sortVector() {
 }
 // Circuit();
 void Circuit::addComponent(std::string &name, std::string type) {
-    // std::cout << "ADDED COMP" << std::endl;
     CompFactory factory;
     CircuitComponent newComp;
-    // nts::AndComponent needFac;
-    //Need TO ADD IN FACTORY HERE;
     newComp.component = factory.createComponent(type);
     newComp.name = name;
-    // std::cout << "ADDED COMP =" << newComp.name << std::endl;
+
+    auto it = std::find_if(_circuit.begin(), _circuit.end(),
+        [&name](const CircuitComponent &comp) { return comp.name == name; });
+    if (it != _circuit.end())
+        throw nts::NanoExecption("Several components share the same name");
+
     _circuit.push_back(std::move(newComp));
-} // use CompFactory(type); from factory class
+}
+// use CompFactory(type); from factory class
 
 void  Circuit::linkComponents(NamePin pair1, NamePin pair2){
     auto currentComp1 = std::find_if(_circuit.begin(), _circuit.end(), [&pair1](const CircuitComponent& cur) {

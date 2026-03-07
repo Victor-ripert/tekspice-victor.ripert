@@ -18,16 +18,17 @@ void FileReader::trimComments(std::string &line) {
 }
 
 bool FileReader::updateSection(std::string line) {
-    if (line == ".chipsets:") {
+    if (line == ".chipsets:" || line == ".chipsets") {
         _section = chipset;
         return true;
     }
-    if (line == ".links:") {
+    if (line == ".links:" || line == ".links") {
         _section = links;
         return true;
     }
     return false;
 }
+
 
 void FileReader::addChipset(std::string &line) {
     size_t typePos = line.find_first_of(" \t");
