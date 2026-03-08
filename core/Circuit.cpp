@@ -106,8 +106,8 @@ void Circuit::updateInput(std::string name, nts::Tristate state) {
 bool inputCheck(nts::IComponent &comp) {
     if(comp.getType() == nts::ClockComp
     || comp.getType() == nts::InputComp
-    || comp.getType() == nts::TrueComp
-    || comp.getType() == nts::FalseComp
+    // || comp.getType() == nts::TrueComp
+    // || comp.getType() == nts::FalseComp
     ) {
         return true;
     }
@@ -124,7 +124,7 @@ void Circuit::printInputs(){
             continue;
         }
         if (inputCheck(*_circuit[i].component)) { // need to add the other type in a smart way // Truetype, False, Clock.
-        std::cout << "\t" <<_circuit[i].name << ": " << _circuit[i].component->getTristate() << std::endl;
+        std::cout << "  " <<_circuit[i].name << ": " << _circuit[i].component->getTristate() << std::endl;
         };
     }
 };// need to sort the "_circuit" first;
@@ -135,7 +135,7 @@ void Circuit::printoutputs(){
     }
     for (size_t i = 0; i < _circuit.size(); i++) {
         if (_circuit[i].component->getType() == nts::OutputComp ) { // need to add the other type in a smart way - i guess only Output maybe
-        std::cout << "\t" <<_circuit[i].name << ": " << _circuit[i].component->getTristate() << std::endl;
+        std::cout << "  " <<_circuit[i].name << ": " << _circuit[i].component->getTristate() << std::endl;
         };
     }
 };// need to sort the "_circuit" first;
